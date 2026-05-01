@@ -110,6 +110,22 @@ npm run dev
 
 ---
 
+## Live Demo & Credentials
+
+The website is currently hosted at: **[https://ethara-ayush.netlify.app/](https://ethara-ayush.netlify.app/)**
+
+You can use the following credentials to log in and test the application:
+
+**Admin Access**
+- **Email:** `ayush@ethara.com`
+- **Password:** `Ayush@123`
+
+**Member Access**
+- **Email:** `member@ethara.com`
+- **Password:** `Ayush@123`
+
+---
+
 ## Project Structure Overview
 - **/client**: Contains the React + Vite frontend application.
   - `src/pages`: Main application views (`Dashboard`, `Login`, `Projects`, `Tasks`, `Users`).
