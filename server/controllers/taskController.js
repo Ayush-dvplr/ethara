@@ -162,6 +162,14 @@ const updateStatus = async (req, res) => {
       return res.status(403).json({ message: "You can only update tasks assigned to you" });
     }
 
+    // Prevent members from moving task status backwards
+    if (req.user.role !== "admin") {
+      const statusOrder = { "pending": 0, "in-progress": 1, "completed": 2 };
+      if (statusOrder[status] < statusOrder[task.status]) {
+        return res.status(400).json({ message: "Members cannot move task status backwards." });
+      }
+    }
+
     task.status = status;
     await task.save();
 
@@ -217,6 +225,11 @@ const toggleCheckpoint = async (req, res) => {
 
     const checkpoint = task.checkpoints.id(req.params.checkpointId);
     if (!checkpoint) return res.status(404).json({ message: "Checkpoint not found" });
+
+    // Prevent members from un-checking completed checkpoints
+    if (req.user.role !== "admin" && checkpoint.isCompleted) {
+      return res.status(400).json({ message: "Members cannot un-check completed checkpoints." });
+    }
 
     // Toggle on/off
     checkpoint.isCompleted = !checkpoint.isCompleted;

@@ -250,17 +250,26 @@ const TaskDetail = () => {
               { value: "pending",     label: "Not started", color: "bg-slate-100 text-slate-600 hover:bg-slate-200 border-slate-200" },
               { value: "in-progress", label: "Working on it", color: "bg-blue-50 text-blue-700 hover:bg-blue-100 border-blue-200" },
               { value: "completed",   label: "Mark complete", color: "bg-green-50 text-green-700 hover:bg-green-100 border-green-200" },
-            ].map(({ value, label, color }) => (
+            ].map(({ value, label, color }) => {
+              const statusOrder = { "pending": 0, "in-progress": 1, "completed": 2 };
+              const isBackward = !isAdmin && statusOrder[value] < statusOrder[task.status];
+              
+              return (
               <button
                 key={value}
                 onClick={() => handleStatusChange(value)}
-                className={`flex-1 w-full sm:w-auto px-4 py-2.5 sm:py-2 rounded-xl text-sm font-medium border transition-colors ${color} ${
-                  task.status === value ? "ring-2 ring-offset-1 ring-current opacity-100" : "opacity-70"
+                disabled={isBackward}
+                className={`flex-1 w-full sm:w-auto px-4 py-2.5 sm:py-2 rounded-xl text-sm font-medium border transition-colors ${
+                  task.status === value 
+                    ? `ring-2 ring-offset-1 ring-current opacity-100 ${color}` 
+                    : isBackward 
+                      ? "opacity-40 cursor-not-allowed bg-slate-50 text-slate-400 border-slate-200" 
+                      : `opacity-70 ${color}`
                 }`}
               >
                 {task.status === value ? `✓ ${label}` : label}
               </button>
-            ))}
+            )})}
           </div>
         </div>
       )}
@@ -272,12 +281,14 @@ const TaskDetail = () => {
             <CheckCircle2 className="w-5 h-5" />
             <span className="text-sm font-semibold">This task is complete</span>
           </div>
-          <button
-            onClick={() => handleStatusChange("in-progress")}
-            className="text-sm text-green-700 underline hover:no-underline"
-          >
-            Reopen
-          </button>
+          {isAdmin && (
+            <button
+              onClick={() => handleStatusChange("in-progress")}
+              className="text-sm text-green-700 underline hover:no-underline"
+            >
+              Reopen
+            </button>
+          )}
         </div>
       )}
 
@@ -335,7 +346,8 @@ const TaskDetail = () => {
                 {/* Toggle button — member and admin can both click this */}
                 <button
                   onClick={() => handleToggleCheckpoint(cp._id)}
-                  className="shrink-0 transition-colors"
+                  disabled={!isAdmin && cp.isCompleted}
+                  className={`shrink-0 transition-colors ${!isAdmin && cp.isCompleted ? "cursor-not-allowed opacity-50" : ""}`}
                 >
                   {cp.isCompleted ? (
                     <CheckCircle2 className="w-5 h-5 text-green-500" />
