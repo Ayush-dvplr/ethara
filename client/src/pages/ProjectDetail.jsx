@@ -194,9 +194,9 @@ const ProjectDetail = () => {
           Back to Projects
         </Link>
 
-        <div className="flex items-start justify-between">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-4 h-12 rounded-full" style={{ backgroundColor: project.color }} />
+            <div className="w-4 h-12 rounded-full shrink-0" style={{ backgroundColor: project.color }} />
             <div>
               <h1 className="text-2xl font-bold text-slate-800">{project.name}</h1>
               {project.description && <p className="text-slate-500 mt-1">{project.description}</p>}
@@ -204,17 +204,17 @@ const ProjectDetail = () => {
           </div>
 
           {isAdmin && (
-            <div className="flex gap-2">
+            <div className="flex gap-2 w-full sm:w-auto">
               <button
                 onClick={() => setShowAddMember(true)}
-                className="flex items-center gap-2 px-3 py-2 text-sm border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
+                className="flex-1 sm:flex-none flex justify-center items-center gap-2 px-3 py-2 text-sm border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
               >
                 <UserPlus className="w-4 h-4" />
                 Add Member
               </button>
               <button
                 onClick={() => setShowAddTask(true)}
-                className="flex items-center gap-2 px-3 py-2 bg-indigo-600 text-white text-sm rounded-xl hover:bg-indigo-700 transition-colors"
+                className="flex-1 sm:flex-none flex justify-center items-center gap-2 px-3 py-2 bg-indigo-600 text-white text-sm rounded-xl hover:bg-indigo-700 transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 Add Task

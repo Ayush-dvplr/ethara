@@ -62,7 +62,7 @@ const Tasks = () => {
       </div>
 
       {/* Filter tabs */}
-      <div className="flex items-center gap-1 mb-6 bg-slate-100 p-1 rounded-xl w-fit">
+      <div className="flex items-center gap-1 mb-6 bg-slate-100 p-1 rounded-xl w-fit max-w-full overflow-x-auto no-scrollbar">
         <Filter className="w-4 h-4 text-slate-400 ml-2" />
         {[...STATUSES, "overdue"].map((filter) => (
           <button

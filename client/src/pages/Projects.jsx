@@ -144,7 +144,7 @@ const Projects = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-2xl font-bold text-slate-800">Projects</h1>
           <p className="text-slate-500 mt-1">
@@ -154,7 +154,7 @@ const Projects = () => {
         {isAdmin && (
           <button
             onClick={() => setShowCreate(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-xl hover:bg-indigo-700 transition-colors"
+            className="flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-xl hover:bg-indigo-700 transition-colors w-full sm:w-auto"
           >
             <Plus className="w-4 h-4" />
             New Project

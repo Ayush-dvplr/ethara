@@ -175,19 +175,19 @@ const TaskDetail = () => {
 
       {/* Task header */}
       <div className="bg-white rounded-2xl border border-slate-200 p-6 mb-6">
-        <div className="flex items-start justify-between gap-4 mb-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
           <h1 className="text-xl font-bold text-slate-800 leading-tight">{task.title}</h1>
           {isAdmin && (
-            <div className="flex gap-2 shrink-0">
+            <div className="flex gap-2 w-full sm:w-auto">
               <button
                 onClick={() => setShowEditTask(true)}
-                className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-colors"
+                className="flex-1 sm:flex-none flex justify-center items-center p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-colors"
               >
                 <Pencil className="w-4 h-4" />
               </button>
               <button
                 onClick={handleDeleteTask}
-                className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors"
+                className="flex-1 sm:flex-none flex justify-center items-center p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors"
               >
                 <Trash2 className="w-4 h-4" />
               </button>
@@ -245,7 +245,7 @@ const TaskDetail = () => {
       {task.status !== "completed" && (
         <div className="bg-white rounded-2xl border border-slate-200 p-5 mb-6">
           <p className="text-sm font-semibold text-slate-700 mb-3">Update your progress</p>
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex flex-col sm:flex-row gap-2 flex-wrap">
             {[
               { value: "pending",     label: "Not started", color: "bg-slate-100 text-slate-600 hover:bg-slate-200 border-slate-200" },
               { value: "in-progress", label: "Working on it", color: "bg-blue-50 text-blue-700 hover:bg-blue-100 border-blue-200" },
@@ -254,7 +254,7 @@ const TaskDetail = () => {
               <button
                 key={value}
                 onClick={() => handleStatusChange(value)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium border transition-colors ${color} ${
+                className={`flex-1 w-full sm:w-auto px-4 py-2.5 sm:py-2 rounded-xl text-sm font-medium border transition-colors ${color} ${
                   task.status === value ? "ring-2 ring-offset-1 ring-current opacity-100" : "opacity-70"
                 }`}
               >

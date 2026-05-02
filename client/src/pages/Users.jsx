@@ -59,9 +59,9 @@ const Users = () => {
       </div>
 
       {/* Summary cards */}
-      <div className="grid grid-cols-2 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
         <div className="bg-indigo-50 rounded-xl border border-indigo-100 p-5 flex items-center gap-4">
-          <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center">
+          <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shrink-0">
             <Shield className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -70,7 +70,7 @@ const Users = () => {
           </div>
         </div>
         <div className="bg-slate-50 rounded-xl border border-slate-200 p-5 flex items-center gap-4">
-          <div className="w-10 h-10 bg-slate-600 rounded-xl flex items-center justify-center">
+          <div className="w-10 h-10 bg-slate-600 rounded-xl flex items-center justify-center shrink-0">
             <User className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -105,8 +105,8 @@ const Users = () => {
 
               {/* Name + email */}
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <p className="text-sm font-medium text-slate-800">{u.name}</p>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <p className="text-sm font-medium text-slate-800 truncate">{u.name}</p>
                   {/* "You" badge */}
                   {u._id === currentUser?._id && (
                     <span className="text-xs bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded-full">You</span>
@@ -136,7 +136,7 @@ const Users = () => {
               </div>
 
               {/* Role selector — admin can change anyone's role except their own */}
-              <div className="relative">
+              <div className="relative shrink-0">
                 {u._id === currentUser?._id ? (
                   // Can't change your own role
                   <span className={`text-xs px-3 py-1.5 rounded-full font-medium capitalize ${
